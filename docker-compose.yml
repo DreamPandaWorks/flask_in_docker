@@ -1,0 +1,34 @@
+version: '3'
+services: 
+    web:
+        build: 
+            context: .
+            dockerfile: Dockerfile
+        container_name: web
+        environment:
+          - APPLICATION_ENV=local
+        volumes: 
+            - ./flask_app:/var/www/flask_app
+            # - socket:/tmp
+        # command: bash -c "service nginx start && /bin/bash"
+        command: bash -c "service nginx start && uwsgi --ini app.ini && /bin/bash"
+        tty: true
+        stdin_open: true
+        ports: 
+            - "80:80"
+
+    database:
+        image: mysql:8.0
+        container_name: database
+        volumes:
+            - ./database/conf:/etc/mysql/conf.d
+            # - ./database/dbdata:/var/lib/mysql/ # データの永続化を行う場合
+        environment:
+            MYSQL_ROOT_PASSWORD: password 
+            MYSQL_DATABASE: flask_app_database
+            MYSQL_USER: flask_app
+            MYSQL_PASSWORD: flask_app
+            TZ: Asia/Tokyo
+        user: "1000:1000"
+        ports:
+            - "3306:3306"
