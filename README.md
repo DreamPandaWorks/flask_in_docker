@@ -3,7 +3,7 @@
 Flask application in a Docker environment.
 Powered by nginx and uWSGI.
 
-![sample](https://user-images.githubusercontent.com/13768156/74453792-410bb980-4ec6-11ea-817c-5dbbb2478a95.jpg)
+![image](https://user-images.githubusercontent.com/88951380/206355413-a1a78de5-d3e5-462d-a174-7ed073af836a.png)
 
 ---
 
