@@ -4,11 +4,11 @@ services:
         build: 
             context: .
             dockerfile: Dockerfile
-        container_name: web
+        container_name: application_server
         environment:
           - APPLICATION_ENV=local
         volumes: 
-            - ./flask_app:/var/www/flask_app
+            - ./flask_app:/var/www/flask_in_docker/flask_app
             # - socket:/tmp
         # command: bash -c "service nginx start && /bin/bash"
         command: bash -c "service nginx start && uwsgi --ini app.ini && /bin/bash"
@@ -19,7 +19,7 @@ services:
 
     database:
         image: mysql:8.0
-        container_name: database
+        container_name: database_server
         volumes:
             - ./database/conf:/etc/mysql/conf.d
             # - ./database/dbdata:/var/lib/mysql/ # データの永続化を行う場合
