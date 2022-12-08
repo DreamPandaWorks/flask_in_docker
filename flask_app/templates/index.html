@@ -8,36 +8,102 @@
 {% endblock  %}
 
 {% block navbar %}
-<div class="ui secondary menu" style="background-color: tranparent;">
-  <div class="ui container">
-    <a class="active item" style="margin: 0.6rem" href={{ url_for("index.index") }}>
-      <i class="home icon"></i>トップ
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="{{ url_for("index.index") }}">
+      <img src="{{ url_for('static', filename='img/112x28.png') }}" width="112" height="28">
     </a>
-    <a class="item" style="margin: 0.6rem">
-      <i class="coffee layout icon"></i>コーヒーを選ぶ
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
     </a>
-    <a class="item" style="margin: 0.6rem">
-      <i class="leaf layout icon"></i>お茶を選ぶ
-    </a>
-    <a class="item" style="margin: 0.6rem">
-      <i class="glass martini layout icon"></i>お酒を選ぶ
-    </a>
-    <div class="right menu">
-      <a class="item">
-          <i class="shopping cart icon"></i>カート
-        </a>
-      <a class="item">
-        <i class="question icon"></i>ヘルプ
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href={{ url_for("index.index") }}>
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+          <span>トップ</span>
+        </span>
       </a>
-      <a class="item" href={{ url_for("auth.login") }}>
-        <i class="user icon"></i>ログイン
+    </div>
+
+    <div class="navbar-end">
+      <a class="navbar-item" href={{ url_for("auth.login") }}>
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-user-plus"></i>
+          </span>
+          <span>ユーザー登録</span>
+        </span>
+      </a>
+      <a class="navbar-item" href={{ url_for("auth.login") }}>
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+          <span>ログイン</span>
+        </span>
       </a>
     </div>
   </div>
-</div>
+</nav>
 {% endblock %}
 
 {% block content %}
+  <div class="columns is-vcentered pt-3">
+    <div class="column">
+      <div class="card">
+        <div class="card-content">
+          <h1 class="title is-4">
+            <a href="https://github.com/DreamPandaWorks/flask_in_docker">flask_in_docker</a>
+          </h1>
+          <p>
+            Flask application in a Docker environment. Powered by nginx and uWSGI.<br>
+            
+          </p>
+          <p>
+            <p class="menu-label">
+            Docker Images
+            </p>
+            <ul class="menu-list">
+              <li><a>ubuntu:20.04</a></li>
+              <li><a>mysql:8.0</a></li>
+            </ul>
+
+            <p class="menu-label">
+              Python Packages（in requirements.txt）
+            </p>
+            <ul class="menu-list">
+              <li><a>flask2.2.2</a></li>
+              <li><a>Flask-Login0.6.2</a></li>
+              <li><a>Flask-WTF1.0.1</a></li>
+              <li><a>Flask-Migrate4.0.0</a></li>
+              <li><a>Flask-Seeder1.2.0</a></li>
+              <li><a>PyMySQL1.0.2</a></li>
+              <li><a>flask-sqlalchemy3.0.2</a></li>
+              <li><a>cryptography38.0.4</a></li>
+              <li><a>uWSGI2.0.21</a></li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="{{ url_for('static', filename='img/1280x720.png') }}" alt="Placeholder image">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
 
