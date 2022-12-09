@@ -1,6 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block title %}
+<title>flask_in_docker - Login</title>
 {% endblock  %}
 
 {% block head %}
@@ -8,37 +9,92 @@
 {% endblock  %}
 
 {% block navbar %}
-<div class="ui secondary menu" style="background-color: tranparent;">
-  <div class="ui container">
-    <a class="item" style="margin: 0.6rem" href={{ url_for("index.index") }}>
-      <i class="home icon"></i>トップ
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="{{ url_for("index.index") }}">
+      <img src="{{ url_for('static', filename='img/112x28.png') }}" width="112" height="28">
     </a>
-    <a class="item" style="margin: 0.6rem">
-      <i class="coffee layout icon"></i>コーヒーを選ぶ
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
     </a>
-    <a class="item" style="margin: 0.6rem">
-      <i class="leaf layout icon"></i>お茶を選ぶ
-    </a>
-    <a class="item" style="margin: 0.6rem">
-      <i class="glass martini layout icon"></i>お酒を選ぶ
-    </a>
-    <div class="right menu">
-      <a class="item">
-          <i class="shopping cart icon"></i>カート
-        </a>
-      <a class="item">
-        <i class="question icon"></i>ヘルプ
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href={{ url_for("index.index") }}>
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+          <span>トップ</span>
+        </span>
       </a>
-      <a class="active item" href={{ url_for("auth.login") }}>
-        <i class="user icon"></i>ログイン
+    </div>
+
+    <div class="navbar-end">
+      <a class="navbar-item" href={{ url_for("auth.login") }}>
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-user-plus"></i>
+          </span>
+          <span>ユーザー登録</span>
+        </span>
+      </a>
+      <a class="navbar-item" href={{ url_for("auth.login") }}>
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-arrow-right"></i>
+          </span>
+          <span>ログイン</span>
+        </span>
       </a>
     </div>
   </div>
-</div>
+</nav>
 {% endblock %}
 
 {% block content %}
+<div class="hero is-halfheight">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="column is-8 is-offset-2">
+        <div class="box">
+          <img src="{{ url_for('static', filename='img/320x320.png') }}">
 
+          <form action="{{ url_for("auth.login") }}" method="POST" name="login_form">
+            {{ form.csrf_token }}
+            <div class="field">
+              <label class="label has-text-left">Email</label>
+              <div class="control has-icons-left">
+                {{ form.email(class_="input", placeholder="Email input", value="") }}
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label has-text-left">Password</label>
+              <div class="control has-icons-left">
+                {{ form.password(class_="input", type="password", placeholder="Password input", value="") }}
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field has-text-left">
+              <p class="control">
+                {{ form.submit(class_="button has-background-link-dark has-text-white-bis", type="submit", value="ログイン") }}
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block scripts %}
