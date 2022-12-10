@@ -1,8 +1,8 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-<title>flask_in_docker - Top</title>
-{% endblock  %}
+<title>flask_in_docker - Dashboard</title>
+{% endblock %}
 
 {% block head %}
     {{ super() }}
@@ -30,6 +30,15 @@
             <i class="fas fa-home"></i>
           </span>
           <span>トップ</span>
+        </span>
+      </a>
+      <a class="navbar-item" href={{ url_for("index.index") }}>
+        <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-users"></i>
+          </span>
+          <span>ユーザー一覧
+          </span>
         </span>
       </a>
     </div>
