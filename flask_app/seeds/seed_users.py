@@ -7,5 +7,4 @@ class UserSeeder(Seeder):
     def run(self):
         for i in range(1, 11):
             user = User(id = i, name = "ユーザー_{}".format(i), email = "user_{}@sample.com".format(i), password = generate_password_hash("password", method = "sha256"))
-            print(user)
             self.db.session.add(user)
