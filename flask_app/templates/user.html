@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-<title>flask_in_docker - Dashboard</title>
+<title>flask_in_docker - User</title>
 {% endblock %}
 
 {% block head %}
@@ -70,54 +70,45 @@
 {% endblock %}
 
 {% block content %}
-  <div class="columns is-vcentered pt-3">
-    <div class="column">
-      <div class="card">
-        <div class="card-content">
-          <h1 class="title is-4">
-            <a href="https://github.com/DreamPandaWorks/flask_in_docker">Welcome to flask_in_docker, {{ current_user.name }}!!! </a>
-          </h1>
+<div class="columns is-vcentered pt-3">
+  <div class="box">
+    <article class="media">
+      <div class="media-left">
+        <figure class="image is-64x64">
+          <img src="{{ url_for('static', filename='img/240x240.png') }}" alt="Image">
+        </figure>
+      </div>
+      <div class="media-content">
+        <div class="content">
           <p>
-            Flask application in a Docker environment. Powered by nginx and uWSGI.<br>
-          </p>
-          <p>
-            <p class="menu-label">
-            Docker Images
-            </p>
-            <ul class="menu-list">
-              <li><a>ubuntu:20.04</a></li>
-              <li><a>mysql:8.0</a></li>
-            </ul>
-
-            <p class="menu-label">
-              Python Packages（in requirements.txt）
-            </p>
-            <ul class="menu-list">
-              <li><a>flask2.2.2</a></li>
-              <li><a>Flask-Login0.6.2</a></li>
-              <li><a>Flask-WTF1.0.1</a></li>
-              <li><a>Flask-Migrate4.0.0</a></li>
-              <li><a>Flask-Seeder1.2.0</a></li>
-              <li><a>PyMySQL1.0.2</a></li>
-              <li><a>flask-sqlalchemy3.0.2</a></li>
-              <li><a>cryptography38.0.4</a></li>
-              <li><a>uWSGI2.0.21</a></li>
-            </ul>
+            <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+            <br>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
           </p>
         </div>
+        <nav class="level is-mobile">
+          <div class="level-left">
+            <a class="level-item" aria-label="reply">
+              <span class="icon is-small">
+                <i class="fas fa-reply" aria-hidden="true"></i>
+              </span>
+            </a>
+            <a class="level-item" aria-label="retweet">
+              <span class="icon is-small">
+                <i class="fas fa-retweet" aria-hidden="true"></i>
+              </span>
+            </a>
+            <a class="level-item" aria-label="like">
+              <span class="icon is-small">
+                <i class="fas fa-heart" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+        </nav>
       </div>
-    </div>
-    <div class="column">
-      <div class="card">
-        <div class="card-image">
-          <figure class="image is-4by3">
-            <img src="{{ url_for('static', filename='img/1280x720.png') }}" alt="Placeholder image">
-          </figure>
-        </div>
-      </div>
-    </div>
+    </article>
   </div>
-
+</div>
 {% endblock %}
 
 {% block scripts %}

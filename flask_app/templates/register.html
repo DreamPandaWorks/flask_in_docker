@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-<title>flask_in_docker - Login</title>
+<title>flask_in_docker - Register</title>
 {% endblock  %}
 
 {% block head %}
@@ -85,7 +85,7 @@
         <div class="box">
           <img src="{{ url_for('static', filename='img/320x320.png') }}">
 
-          <form action="{{ url_for("auth.login") }}" method="POST" name="login_form">
+          <form action="{{ url_for("auth.register") }}" method="POST" name="register_form">
             {{ form.csrf_token }}
             <div class="field">
               <label class="label has-text-left">Email</label>
@@ -93,6 +93,15 @@
                 {{ form.email(class_="input", placeholder="Email input") }}
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label has-text-left">Username</label>
+              <div class="control has-icons-left">
+                {{ form.user_name(class_="input", placeholder="Username input") }}
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
                 </span>
               </div>
             </div>
@@ -107,7 +116,7 @@
             </div>
             <div class="field has-text-left">
               <p class="control">
-                {{ form.submit(class_="button has-background-link-dark has-text-white-bis", type="submit", value="ログイン") }}
+                {{ form.submit(class_="button has-background-link-dark has-text-white-bis", type="submit", value="新規登録") }}
               </p>
             </div>
           </form>

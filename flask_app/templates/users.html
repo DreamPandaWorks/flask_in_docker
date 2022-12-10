@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-<title>flask_in_docker - Dashboard</title>
+<title>flask_in_docker - Users</title>
 {% endblock %}
 
 {% block head %}
@@ -70,54 +70,43 @@
 {% endblock %}
 
 {% block content %}
-  <div class="columns is-vcentered pt-3">
-    <div class="column">
-      <div class="card">
-        <div class="card-content">
-          <h1 class="title is-4">
-            <a href="https://github.com/DreamPandaWorks/flask_in_docker">Welcome to flask_in_docker, {{ current_user.name }}!!! </a>
-          </h1>
-          <p>
-            Flask application in a Docker environment. Powered by nginx and uWSGI.<br>
-          </p>
-          <p>
-            <p class="menu-label">
-            Docker Images
-            </p>
-            <ul class="menu-list">
-              <li><a>ubuntu:20.04</a></li>
-              <li><a>mysql:8.0</a></li>
-            </ul>
-
-            <p class="menu-label">
-              Python Packages（in requirements.txt）
-            </p>
-            <ul class="menu-list">
-              <li><a>flask2.2.2</a></li>
-              <li><a>Flask-Login0.6.2</a></li>
-              <li><a>Flask-WTF1.0.1</a></li>
-              <li><a>Flask-Migrate4.0.0</a></li>
-              <li><a>Flask-Seeder1.2.0</a></li>
-              <li><a>PyMySQL1.0.2</a></li>
-              <li><a>flask-sqlalchemy3.0.2</a></li>
-              <li><a>cryptography38.0.4</a></li>
-              <li><a>uWSGI2.0.21</a></li>
-            </ul>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="card">
-        <div class="card-image">
-          <figure class="image is-4by3">
-            <img src="{{ url_for('static', filename='img/1280x720.png') }}" alt="Placeholder image">
-          </figure>
-        </div>
-      </div>
-    </div>
-  </div>
-
+<div class="columns is-vcentered pt-3">
+  <div class="column">
+<table class="table is-fullwidth is-bordered is-striped is-hoverable">
+  <thead>
+    <tr>
+      <th><abbr>ID</abbr></th>
+      <th><abbr>ユーザー名</abbr></th>
+      <th><abbr>メールアドレス</abbr></th>
+      <th><abbr>作成日</abbr></th>
+      <th><abbr>更新日</abbr></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+      {% if current_user.email == user.email %}
+      <tr class="has-text-link-dark has-background-link-light">
+        <th>{{ user.id }}</th>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.created_at }}</td>
+        <td>{{ user.updated_at }}</td>
+      </tr>
+      {% endif %}
+      {% if current_user.email != user.email %}
+      <tr>
+        <th>{{ user.id }}</th>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.created_at }}</td>
+        <td>{{ user.updated_at }}</td>
+      </tr>
+      {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+</div>
 {% endblock %}
 
 {% block scripts %}

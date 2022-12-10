@@ -5,6 +5,7 @@ from flask_seeder import FlaskSeeder
 from views.dashboard import dashboard_pages
 from views.auth import auth_pages
 from views.index import index_pages
+from views.user import user_pages
 
 import config
 from models import User, database
@@ -25,6 +26,7 @@ seeder.init_app(app, database)
 app.register_blueprint(index_pages)
 app.register_blueprint(auth_pages)
 app.register_blueprint(dashboard_pages)
+app.register_blueprint(user_pages)
 
 @login_manager.user_loader
 def load_user(user_id): 

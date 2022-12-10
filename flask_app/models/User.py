@@ -13,7 +13,7 @@ class User(database.Model, UserMixin):
     updated_at = database.Column(database.DateTime, default=datetime.datetime.now, onupdate=datetime.datetime.now)
 
     def __repr__(self):
-        return "<User {0}, {1}>".format(self.name, self.email)
+        return "<User {0}, {1}, {2}>".format(self.id, self.name, self.email)
 
 if __name__ == "__main__":
     pass
