@@ -42,7 +42,6 @@
         </span>
       </a>
     </div>
-
     <div class="navbar-end">
       <a class="navbar-item" href={{ url_for("user") }}>
         <span class="icon-text">
@@ -70,42 +69,81 @@
 {% endblock %}
 
 {% block content %}
+
+<nav class="level pt-2">
+  <div class="level-left"></div>
+  <div class="level-right">
+    <div class="level-item">
+      <form action="{{ url_for("users") }}" method="GET" name="filter_form">
+        <div class="field">
+          <div class="control has-icons-left">
+            {{ form.si(class_="input", placeholder="Search User") }}
+            <span class="icon is-small is-left">
+              <i class="fas fa-search"></i>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
 <div class="columns is-vcentered pt-3">
   <div class="column">
-<table class="table is-fullwidth is-bordered is-striped is-hoverable">
-  <thead>
-    <tr>
-      <th><abbr>ID</abbr></th>
-      <th><abbr>ユーザー名</abbr></th>
-      <th><abbr>メールアドレス</abbr></th>
-      <th><abbr>作成日</abbr></th>
-      <th><abbr>更新日</abbr></th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for user in users %}
-      {% if current_user.email == user.email %}
-      <tr class="has-text-link-dark has-background-link-light">
-        <th>{{ user.id }}</th>
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.created_at }}</td>
-        <td>{{ user.updated_at }}</td>
-      </tr>
-      {% endif %}
-      {% if current_user.email != user.email %}
-      <tr>
-        <th>{{ user.id }}</th>
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.created_at }}</td>
-        <td>{{ user.updated_at }}</td>
-      </tr>
-      {% endif %}
-    {% endfor %}
-  </tbody>
-</table>
+    <div style="overflow-x: auto;">
+      <table class="table is-fullwidth is-bordered is-striped is-hoverable">
+        <thead>
+          <tr>
+            <th><abbr>ID</abbr></th>
+            <th><abbr>ユーザー名</abbr></th>
+            <th><abbr>メールアドレス</abbr></th>
+            <th><abbr>作成日</abbr></th>
+            <th><abbr>更新日</abbr></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+            {% if current_user.email == user.email %}
+            <tr class="has-text-link-dark has-background-link-light">
+              <th>{{ user.id }}</th>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.created_at }}</td>
+              <td>{{ user.updated_at }}</td>
+            </tr>
+            {% endif %}
+            {% if current_user.email != user.email %}
+            <tr>
+              <th>{{ user.id }}</th>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.created_at }}</td>
+              <td>{{ user.updated_at }}</td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+
+<div class="columns is-vcentered pt-2">
+  <div class="column">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+      <a class="pagination-previous">Previous</a>
+      <a class="pagination-next">Next page</a>
+      <ul class="pagination-list">
+        <li><a class="pagination-link" aria-label="Goto page 1">1</a></li>
+        <li><span class="pagination-ellipsis">&hellip;</span></li>
+        <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
+        <li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a></li>
+        <li><a class="pagination-link" aria-label="Goto page 47">47</a></li>
+        <li><span class="pagination-ellipsis">&hellip;</span></li>
+        <li><a class="pagination-link" aria-label="Goto page 86">86</a></li>
+      </ul>
+    </nav>
+  </div>
 </div>
 {% endblock %}
 

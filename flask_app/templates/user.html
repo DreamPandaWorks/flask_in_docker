@@ -70,43 +70,66 @@
 {% endblock %}
 
 {% block content %}
-<div class="columns is-vcentered pt-3">
-  <div class="box">
-    <article class="media">
-      <div class="media-left">
-        <figure class="image is-64x64">
-          <img src="{{ url_for('static', filename='img/240x240.png') }}" alt="Image">
-        </figure>
+
+{% if get_flashed_messages() %}
+  <article class="message is-link">
+    {% for message in get_flashed_messages() %}
+      <div class="message-body">
+        {{ message }}
       </div>
-      <div class="media-content">
-        <div class="content">
-          <p>
-            <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-            <br>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+    {% endfor %}
+  </article>
+{% endif %}
+
+{% if form.errors %}
+  {% for index in form.errors %}
+  <article class="message is-link">
+    <div class="message-body">
+      {{ "".join(form.errors[index]) }}
+    </div>
+  </article>
+  {% endfor %}
+{% endif %}
+
+<div class="columns is-vcentered pt-3">
+  <div class="column is-8 is-offset-2">
+    <div class="box">
+      <form action="{{ url_for("user") }}" method="POST" name="user_form">
+        {{ form.csrf_token }}
+        <div class="field">
+          <label class="label has-text-left">Username</label>
+          <div class="control has-icons-left">
+            {{ form.user_name(class_="input", placeholder="Username input") }}
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label has-text-left">Old password</label>
+          <div class="control has-icons-left">
+            {{ form.old_password(class_="input", placeholder="Old password input") }}
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label has-text-left">New password</label>
+          <div class="control has-icons-left">
+            {{ form.new_password(class_="input", placeholder="New password input") }}
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </div>
+        </div>
+        <div class="field has-text-left">
+          <p class="control">
+            {{ form.submit(class_="button has-background-link-dark has-text-white-bis", type="submit") }}
           </p>
         </div>
-        <nav class="level is-mobile">
-          <div class="level-left">
-            <a class="level-item" aria-label="reply">
-              <span class="icon is-small">
-                <i class="fas fa-reply" aria-hidden="true"></i>
-              </span>
-            </a>
-            <a class="level-item" aria-label="retweet">
-              <span class="icon is-small">
-                <i class="fas fa-retweet" aria-hidden="true"></i>
-              </span>
-            </a>
-            <a class="level-item" aria-label="like">
-              <span class="icon is-small">
-                <i class="fas fa-heart" aria-hidden="true"></i>
-              </span>
-            </a>
-          </div>
-        </nav>
-      </div>
-    </article>
+      </form>
+    </div>
   </div>
 </div>
 {% endblock %}

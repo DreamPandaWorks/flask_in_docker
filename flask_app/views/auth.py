@@ -2,7 +2,7 @@ from flask import Blueprint, flash, request, render_template, redirect, url_for
 from flask_login import login_user, logout_user
 from flask_wtf import FlaskForm
 from werkzeug.security import check_password_hash, generate_password_hash
-from wtforms import StringField, SubmitField, PasswordField, validators
+from wtforms import EmailField, StringField, SubmitField, PasswordField, validators
 from models import User, database
 
 auth_pages = Blueprint('auth', __name__, template_folder='templates')
@@ -13,7 +13,7 @@ class RegisterForm(FlaskForm):
     Args:
         FlaskForm (FlaskForm): ユーザー新規登録フォーム。
     """
-    email = StringField('メールアドレス', validators=[validators.InputRequired(message='メールアドレスを入力してください。'), validators.Length(max=256, message='256文字以内で入力してください。'), validators.Email(message="有効なメールアドレスを入力してください。")])
+    email = EmailField('メールアドレス', validators=[validators.InputRequired(message='メールアドレスを入力してください。'), validators.Length(max=256, message='256文字以内で入力してください。'), validators.Email(message="有効なメールアドレスを入力してください。")])
     user_name = StringField('ユーザー名', validators=[validators.InputRequired(message='ユーザー名を入力してください。'), validators.Length(min=4, max=64)])
     password = PasswordField('パスワード', validators=[validators.InputRequired(message='パスワードを入力してください。'), validators.Length(min=8, max=128)])
     submit = SubmitField('ログイン')
@@ -45,7 +45,7 @@ class LoginForm(FlaskForm):
     Args:
         FlaskForm (FlaskForm): ログインフォーム。
     """
-    email = StringField('メールアドレス', validators=[validators.InputRequired(message='メールアドレスを入力してください。'), validators.Length(max=256), validators.Email(message="有効なメールアドレスを入力してください。")])
+    email = EmailField('メールアドレス', validators=[validators.InputRequired(message='メールアドレスを入力してください。'), validators.Length(max=256), validators.Email(message="有効なメールアドレスを入力してください。")])
     password = PasswordField('パスワード', validators=[validators.InputRequired(message='パスワードを入力してください。'), validators.Length(max=128)])
     submit = SubmitField('ログイン')
 
