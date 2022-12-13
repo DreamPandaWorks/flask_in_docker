@@ -58,20 +58,20 @@ def user():
             if user is None:
                 flash("ユーザーが見つかりません。")
                 return redirect(url_for("user"))
-            
-            if not check_password_hash(user.password, form.old_password.data):
-                flash("現在のパスワードが一致しません。")
-                return redirect(url_for("user"))
-            
+
             # ユーザー名は絶対更新
             user.name = form.user_name.data
             
             # パスワード
             new_password = form.new_password.data
             if new_password != "":
+                if not check_password_hash(user.password, form.old_password.data):
+                    flash("現在のパスワードが一致しません。")
+                    return redirect(url_for("user"))
+                
                 user.password = generate_password_hash(new_password, method = "sha256")
+
             database.session.commit()
-            
             flash("ユーザー情報を更新しました。")
             return redirect(url_for("user"))
         else:
