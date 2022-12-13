@@ -66,7 +66,7 @@ $ flask seed run
 #### 🧰Usage
 
 - Default user's login attribute is <b>user_1@sample.com / password</b>.
-- See [this document](https://github.com/omachi-satoshi) for information on how to deploy to a production environment(for AWS EC2 Ubuntu20.04).
+- See [this document](https://github.com/DreamPandaWorks/flask_in_docker/blob/main/DEPLOY.md) for information on how to deploy to a production environment(for AWS EC2 Ubuntu20.04).
 
 ---
 

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_seeder import FlaskSeeder
