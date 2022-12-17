@@ -63,10 +63,15 @@ def user():
             user.name = form.user_name.data
             
             # パスワード
+            old_password = form.old_password.data
             new_password = form.new_password.data
-            if new_password != "":
+            if old_password != "" or new_password != "":
                 if not check_password_hash(user.password, form.old_password.data):
                     flash("現在のパスワードが一致しません。")
+                    return redirect(url_for("user"))
+                
+                if new_password == "":
+                    flash("新しいパスワードを入力してください。")
                     return redirect(url_for("user"))
                 
                 user.password = generate_password_hash(new_password, method = "sha256")
