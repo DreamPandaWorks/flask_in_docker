@@ -1,6 +1,7 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
+from flask_paginate import Pagination, get_page_parameter
 from wtforms import StringField, SearchField, PasswordField, SubmitField, validators, ValidationError
 from werkzeug.security import check_password_hash, generate_password_hash
 from models import User, database
@@ -28,8 +29,13 @@ def users():
         users = User.query.filter(User.name.like("%{}%".format(si))).all()
     else:
         users = User.query.all()
+
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    per_users = users[(page - 1) * 10: page * 10]
     
-    return render_template('users.html', form = form, users = users, si = si)
+    pagination = Pagination(page=page, total=len(users),  per_page=10, css_framework='bulma', bulma_style="centered", link_size="small")
+
+    return render_template('users.html', form = form, users = per_users, si = si, pagination = pagination)
 
 class UserEditForm(FlaskForm):
     """ユーザー情報編集フォーム
@@ -63,10 +69,15 @@ def user():
             user.name = form.user_name.data
             
             # パスワード
+            old_password = form.old_password.data
             new_password = form.new_password.data
-            if new_password != "":
+            if old_password != "" or new_password != "":
                 if not check_password_hash(user.password, form.old_password.data):
                     flash("現在のパスワードが一致しません。")
+                    return redirect(url_for("user"))
+                
+                if new_password == "":
+                    flash("新しいパスワードを入力してください。")
                     return redirect(url_for("user"))
                 
                 user.password = generate_password_hash(new_password, method = "sha256")

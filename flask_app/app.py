@@ -1,3 +1,5 @@
+import sys
+import io
 from flask import Flask
 from flask_login import LoginManager
 from flask_migrate import Migrate
@@ -9,6 +11,8 @@ from views.user import user_pages
 
 import config
 from models import User, database
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 app = Flask(__name__)
 
