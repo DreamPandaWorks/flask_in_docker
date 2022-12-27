@@ -3,6 +3,7 @@ Flask-Login==0.6.2
 Flask-WTF==1.0.1
 wtforms[email]==3.0.1
 Flask-Migrate==4.0.0
+flask-paginate==2022.1.8
 Flask-Seeder==1.2.0
 PyMySQL==1.0.2
 python-dotenv==0.19.2
