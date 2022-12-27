@@ -28,26 +28,31 @@ Powered by nginx and uWSGI.
 ---
 
 #### 👩‍💻Setup
+1. Copy .env.example to .env and edit .env file.
 
-1. Build services.
+```bash
+$ cp .env.example ./.env
+```
+
+2. Build services.
 
 ```bash
 $ docker-compose build
 ```
 
-2. Create and start a containers.
+3. Create and start a containers.
 
 ```bash
 $ docker-compose up -d
 ```
 
-3. Enter the 「web」container.
+4. Enter the 「web」container.
 
 ```bash
 $ docker-compose exec web bash
 ```
 
-4. Execute Database migration.
+5. Execute Database migration.
 
 ```bash
 $ flask db init
@@ -55,11 +60,13 @@ $ flask db migrate
 $ flask db upgrade
 ```
 
-5. Execute Database seeding.
+6. Execute Database seeding.
 
 ```bash
 $ flask seed run
 ```
+
+7. Access http://localhost/ in web browser.
 
 ---
 
