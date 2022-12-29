@@ -19,6 +19,7 @@ Powered by nginx and uWSGI.
   - Flask-Login==0.6.2
   - Flask-WTF==1.0.1
   - Flask-Migrate==4.0.0
+  - flask-paginate==2022.1.8
   - Flask-Seeder==1.2.0
   - PyMySQL==1.0.2
   - flask-sqlalchemy==3.0.2
@@ -28,6 +29,7 @@ Powered by nginx and uWSGI.
 ---
 
 #### 👩‍💻Setup
+
 1. Copy .env.example to .env and edit .env file.
 
 ```bash
@@ -73,7 +75,7 @@ $ flask seed run
 #### 🧰Usage
 
 - Default user's login attribute is <b>user_1@sample.com / password</b>.
-- See [this document](https://github.com/DreamPandaWorks/flask_in_docker/blob/main/DEPLOY.md) for information on how to deploy to a production environment(for AWS EC2 Ubuntu20.04).
+- See [this document](https://github.com/DreamPandaWorks/flask_in_docker/blob/main/how_to_deploy.md) for information on how to deploy to a production environment(for AWS EC2 Ubuntu20.04).
 
 ---
 
