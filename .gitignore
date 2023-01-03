@@ -133,3 +133,4 @@ migrations/
 wsgi_logs/
 flask_in_docker_deploy_test.pem
 memo.txt
+node_modules/
