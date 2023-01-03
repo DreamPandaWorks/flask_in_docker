@@ -57,27 +57,6 @@
 {% endblock %}
 
 {% block content %}
-
-{% if get_flashed_messages() %}
-  <article class="message is-link">
-    {% for message in get_flashed_messages() %}
-      <div class="message-body">
-        {{ message }}
-      </div>
-    {% endfor %}
-  </article>
-{% endif %}
-
-{% if form.errors %}
-  {% for index in form.errors %}
-  <article class="message is-link">
-    <div class="message-body">
-      {{ "".join(form.errors[index]) }}
-    </div>
-  </article>
-  {% endfor %}
-{% endif %}
-
 <div class="hero is-halfheight">
   <div class="hero-body">
     <div class="container has-text-centered">
@@ -119,4 +98,25 @@
 {% endblock %}
 
 {% block scripts %}
+  {% if get_flashed_messages() %}
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+      {% if category == "success" %}
+        <script>
+          bulmaToast.toast({ message: "{{ message }}", type: 'is-link', position: "top-right", duration: 5000, closeOnClick: true, pauseOnHover: true, dismissible: true});
+        </script>
+      {% endif %}
+      {% if category == "failure" %}
+        <script>
+          bulmaToast.toast({ message: "{{ message }}", type: 'is-warning', position: "top-right", duration: 5000, closeOnClick: true, pauseOnHover: true, dismissible: true});
+        </script>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% if form.errors %}
+    {% set error_message = "\n".join(form.errors) %}
+    <script>
+      bulmaToast.toast({ message: "{{ error_message }}", type: 'is-warning', position: "top-right", duration: 5000, closeOnClick: true, pauseOnHover: true, dismissible: true});
+    </script>
+  {% endif %}
 {% endblock %}
