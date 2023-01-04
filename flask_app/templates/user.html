@@ -71,30 +71,10 @@
 
 {% block content %}
 
-{% if get_flashed_messages() %}
-  <article class="message is-link">
-    {% for message in get_flashed_messages() %}
-      <div class="message-body">
-        {{ message }}
-      </div>
-    {% endfor %}
-  </article>
-{% endif %}
-
-{% if form.errors %}
-  {% for index in form.errors %}
-  <article class="message is-link">
-    <div class="message-body">
-      {{ "".join(form.errors[index]) }}
-    </div>
-  </article>
-  {% endfor %}
-{% endif %}
-
 <div class="columns is-vcentered pt-3">
   <div class="column is-8 is-offset-2">
     <div class="box">
-      <form action="{{ url_for("user") }}" method="POST" name="user_form">
+      <form id="user_form" name="user_form" action="{{ url_for("user") }}" method="POST">
         {{ form.csrf_token }}
         <div class="field">
           <label class="label has-text-left">Username</label>
@@ -123,16 +103,45 @@
             </span>
           </div>
         </div>
-        <div class="field has-text-left">
-          <p class="control">
-            {{ form.submit(class_="button has-background-link-dark has-text-white-bis", type="submit") }}
-          </p>
-        </div>
       </form>
     </div>
   </div>
 </div>
+
 {% endblock %}
 
+{% block footer %} 
+<div class="box column is-full" style="bottom:0;position:fixed;z-index:9999;background-color:#EFEFEF;border-radius:0;">
+  <div class="box column is-8 is-offset-2" style="padding:0;background-color:#EFEFEF;">
+    <div class="field has-text-left">
+      <p class="control">
+        {{ form.submit(class_="button has-background-link-dark has-text-white-bis is-medium", type="submit", form="user_form") }}
+      </p>
+    </div>
+  </div>
+</div>
+{%endblock %}
+
 {% block scripts %}
+  {% if get_flashed_messages() %}
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+      {% if category == "success" %}
+        <script>
+          bulmaToast.toast({ message: "{{ message }}", type: 'is-link', position: "top-right", duration: 5000, closeOnClick: true, pauseOnHover: true, dismissible: true});
+        </script>
+      {% endif %}
+      {% if category == "failure" %}
+        <script>
+          bulmaToast.toast({ message: "{{ message }}", type: 'is-warning', position: "top-right", duration: 5000, closeOnClick: true, pauseOnHover: true, dismissible: true});
+        </script>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% if form.errors %}
+    {% set error_message = "\n".join(form.errors) %}
+    <script>
+      bulmaToast.toast({ message: "{{ error_message }}", type: 'is-warning', position: "top-right", duration: 5000, closeOnClick: true, pauseOnHover: true, dismissible: true});
+    </script>
+  {% endif %}
 {% endblock %}

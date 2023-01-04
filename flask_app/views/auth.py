@@ -34,7 +34,7 @@ def register():
                 login_user(user)
                 return redirect(url_for("dashboard.dashboard"))
             else:
-                flash("登録済みのメールアドレスです。")
+                flash("登録済みのメールアドレスです。", "failure")
                 return render_template('register.html', form=form)
         else:
             return redirect(url_for("auth.register"))
@@ -60,9 +60,10 @@ def login():
             user = User.query.filter_by(email=form.email.data).first()
             if user is not None and check_password_hash(user.password, form.password.data):
                 login_user(user)
+                flash("ログインしました。", "success")
                 return redirect(url_for("dashboard.dashboard"))
             else:
-                flash("ログインに失敗しました。")
+                flash("ログインに失敗しました。", "failure")
                 return render_template("login.html", form=form)
         else:
             return render_template("login.html", form=form)

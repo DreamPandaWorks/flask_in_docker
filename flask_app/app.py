@@ -34,6 +34,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "{}://{}:{}@{}/{}?charset={}".format(
     os.getenv('DATABASE_NAME'),
     os.getenv('CHARSET')
 )
+
 app.config['SQLALCHEMY_ECHO'] = bool(os.getenv('SQLALCHEMY_ECHO'))
 database.init_app(app)
 migrate = Migrate(app, database)
