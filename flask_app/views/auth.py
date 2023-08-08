@@ -37,7 +37,8 @@ def register():
                 flash("登録済みのメールアドレスです。", "failure")
                 return render_template('register.html', form=form)
         else:
-            return redirect(url_for("auth.register"))
+            flash("新規登録に失敗しました。", "failure")
+            return render_template("register.html", form=form)
 
 class LoginForm(FlaskForm):
     """ログインフォーム
@@ -66,6 +67,7 @@ def login():
                 flash("ログインに失敗しました。", "failure")
                 return render_template("login.html", form=form)
         else:
+            flash("ログインに失敗しました。", "failure")
             return render_template("login.html", form=form)
 
 @auth_pages.route('/logout', methods=["GET"])
