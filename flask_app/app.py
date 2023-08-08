@@ -30,7 +30,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "{}://{}:{}@{}/{}?charset={}".format(
     os.getenv('ENGINE'),
     os.getenv('USER'),
     os.getenv('PASSWORD'),
-    os.getenv('HOST'),
+    os.getenv('DATABSE_HOST'),
     os.getenv('DATABASE_NAME'),
     os.getenv('CHARSET')
 )
@@ -52,4 +52,4 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 if __name__ == "__main__":
-    app.run(host=os.getenv('HOST'), port=int(os.getenv('PORT')), debug=bool(os.getenv('DEBUG')))
+    app.run(host=str(os.getenv('HOST')), port=int(os.getenv('PORT')), debug=bool(os.getenv('DEBUG')))

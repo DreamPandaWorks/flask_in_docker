@@ -8,6 +8,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # install lib
 RUN apt-get update
+RUN apt-get -y install curl
+RUN apt-get -y install wget
 RUN apt-get -y install git
 RUN apt-get -y install nginx
 RUN apt-get -y install vim
